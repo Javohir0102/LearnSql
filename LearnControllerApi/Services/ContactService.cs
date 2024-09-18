@@ -10,8 +10,8 @@ namespace LearnSql.Services
 {
     public class ContactService : IContactService
     {
-        private FileService fileServiceDb;
-        public ContactService(FileService recivedFileService)
+        private IFileService fileServiceDb;
+        public ContactService(IFileService recivedFileService)
         {
             fileServiceDb = recivedFileService;
         }
@@ -30,6 +30,11 @@ namespace LearnSql.Services
             {
                 throw new ContactStoreException( "Baza uxladi. biz bilan boglaning bu holatda", ex);
             }
+        }
+
+        public async Task<List<Contact>> GetAllContactsAsync()
+        {
+            return await fileServiceDb.SelectAllContactAsync();
         }
 
         public async Task<Contact> RemoveContactAsync(Contact contact)

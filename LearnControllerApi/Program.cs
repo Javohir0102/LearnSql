@@ -1,4 +1,6 @@
 
+using LearnSql.Services;
+
 namespace LearnControllerApi
 {
     public class Program
@@ -8,7 +10,8 @@ namespace LearnControllerApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddTransient<IContactService, ContactService>();
+            builder.Services.AddTransient<IFileService, FileService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
